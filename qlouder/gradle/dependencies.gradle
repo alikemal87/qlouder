@@ -1,0 +1,59 @@
+ext {
+    //used libraries versions
+    libVersions =
+            [
+                    servletApi3             : '3.1.0',
+                    servletApi2             : '2.5',
+                    junit                   : '4.12',
+                    gae                     : '+',
+                    gaeEndpoints            : '+',
+                    googleGradlePlugin      : '+',
+                    googleEndpointsPlugin   : '+',
+                    otherGAEStuff           : '1.22.0',
+            ]
+
+    deployConfig = [
+            project                         : "qlouder-example",
+            version                         : "1",
+            stopPreviousVersion             : false,  // default - stop the current version
+            promote                         : true   // automatically make this version the default
+    ]
+
+    //used libraries
+    libs = [
+            servletApi3              : "javax.servlet:javax.servlet-api:${libVersions.servletApi3}",
+            servletApi2              : "javax.servlet:javax.servlet-api:${libVersions.servletApi2}",
+            junit                   : "junit:junit:${libVersions.junit}",
+
+            gae                     : [
+                    "com.google.appengine:appengine-api-1.0-sdk:+",
+                    "com.google.appengine:appengine:+",
+                    "com.google.endpoints:endpoints-framework:${libVersions.gaeEndpoints}",
+                    "com.google.api-client:google-api-client-servlet:${libVersions.otherGAEStuff}",
+                    "com.google.api-client:google-api-client-appengine:${libVersions.otherGAEStuff}",
+                    "com.google.oauth-client:google-oauth-client-jetty:${libVersions.otherGAEStuff}"
+            ],
+            gaeTest                 : [
+                    "com.google.appengine:appengine-testing:${libVersions.gae}",
+                    "com.google.appengine:appengine-api-stubs:${libVersions.gae}"
+            ],
+            gaeLabs                 : "com.google.appengine:appengine-api-labs:${libVersions.gae}",
+            googleGradlePlugin      : "com.google.cloud.tools:appengine-gradle-plugin:${libVersions.googleGradlePlugin}",
+            googleEndpointsPlugin   : "com.google.cloud.tools:endpoints-framework-gradle-plugin:${libVersions.googleEndpointsPlugin}",
+    ]
+
+    //configs
+    config = [
+            gae: [
+                    port           : [
+                            default: 8880,
+                            backend: 8881
+                    ],
+                    defaultJvmFlags: [
+                            '-Dappengine.fullscan.seconds=3',
+                            "-Ddatastore.backing_store=$projectDir/appengine-generated/local_db.bin".toString(),
+                            "-Ddatastore.generated_dir=$projectDir/appengine-generated/".toString()
+                    ]
+            ]
+    ]
+}

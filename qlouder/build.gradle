@@ -1,0 +1,33 @@
+group 'com.qlouder'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        // latest App Engine Gradle tasks
+        classpath libs.googleGradlePlugin
+        classpath libs.googleEndpointsPlugin
+    }
+}
+
+apply plugin: 'war'
+apply plugin: 'com.google.cloud.tools.appengine'
+apply plugin: 'com.google.cloud.tools.endpoints-framework-server'
+
+
+dependencies {
+    compile libs.gae
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+appengine {
+    deploy {
+        projectId = deployConfig.project
+        version = deployConfig.version
+        stopPreviousVersion = deployConfig.stopPreviousVersion
+        promote = deployConfig.promote
+    }
+}
