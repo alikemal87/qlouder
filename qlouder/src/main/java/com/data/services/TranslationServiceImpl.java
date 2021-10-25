@@ -11,6 +11,7 @@ import com.google.cloud.translate.TranslateOptions;
 import com.google.cloud.translate.Translation;
 import com.google.cloud.translate.Translate.TranslateOption;
 import org.springframework.stereotype.Service;
+import org.springframework.stereotype.PostConstruct;
 
 @Service
 public class TranslationServiceImpl implements TranslationService{
@@ -19,7 +20,7 @@ public class TranslationServiceImpl implements TranslationService{
 	public TranslationServiceImpl() {
 		init();
 	}
-
+@PostConstruct
 	private void init() {
 		try {
 			if (SystemProperty.environment.value() == SystemProperty.Environment.Value.Production) {
