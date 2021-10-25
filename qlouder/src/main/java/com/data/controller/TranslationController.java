@@ -31,7 +31,7 @@ public class TranslationController {
 	public ResponseEntity<Void> getParam(@RequestParam(required = true) String fileName,
 			@RequestParam(required = true) String toLanguage) throws Exception {
 		String[] newFileName;
-		if (!fileName.contains(".txt"))
+		if (!fileName.endsWith(".txt"))
 			throw new Exception("Wrong file name");
 
 		try {
@@ -47,22 +47,6 @@ public class TranslationController {
 
 		return ResponseEntity.created(location).build();
 
-	}
-
-	public StorageService getStorageService() {
-		return storageService;
-	}
-
-	public void setStorageService(StorageService storageService) {
-		this.storageService = storageService;
-	}
-
-	public TranslationService getTranslationService() {
-		return translationService;
-	}
-
-	public void setTranslationService(TranslationService translationService) {
-		this.translationService = translationService;
 	}
 
 }
