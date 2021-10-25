@@ -26,8 +26,8 @@ public class StorageServiceImpl implements StorageService{
 	public StorageServiceImpl() {
 		init();
 	}
-
-	private void init() {
+                @PostConstruct
+		private void init() {
 		try {
 			
 			if (SystemProperty.environment.value() == SystemProperty.Environment.Value.Production) {
